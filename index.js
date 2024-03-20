@@ -20,10 +20,19 @@ app.post('/api/synonym', (req, res) => {
         createSynonym(synonym)
         res.status(201).json(synonym)
     } catch (error) {
-        res.status(422).json({ error: error.message });
+        res.status(422).json({ error: error.message })
     }
 })
 
+app.get('/api/synonym/:text', (req, res) => {
+    const { text } = req.params
+    try {
+        const synonym = readSynonym(text)
+        res.status(200).json(synonym)
+    } catch (error) {
+        res.status(404).json({ error: error.message })
+    }
+})
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
