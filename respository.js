@@ -19,6 +19,7 @@ export function readSynonym(text) {
 export function createSynonym(synonym) {
     if (!synonyms.has(synonym.text)) {
         synonyms.set(synonym.text, synonym)
+        return synonym
     } else {
         throw new Error('ALREADY EXISTS')
     }
@@ -26,6 +27,7 @@ export function createSynonym(synonym) {
 
 export function updateSynonym(text, synonym) {
     synonyms.set(text, synonym)
+    return synonym
 }
 
 export function deleteSynonym(text) {

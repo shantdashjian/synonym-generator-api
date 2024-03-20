@@ -17,8 +17,7 @@ app.get('/api/synonym', (req, res) => {
 app.post('/api/synonym', (req, res) => {
     const synonym = req.body
     try {
-        createSynonym(synonym)
-        res.status(201).json(synonym)
+        res.status(201).json(createSynonym(synonym))
     } catch (error) {
         res.status(422).json({ error: error.message })
     }
@@ -27,12 +26,23 @@ app.post('/api/synonym', (req, res) => {
 app.get('/api/synonym/:text', (req, res) => {
     const { text } = req.params
     try {
-        const synonym = readSynonym(text)
-        res.status(200).json(synonym)
+        res.status(200).json(readSynonym(text))
     } catch (error) {
         res.status(404).json({ error: error.message })
     }
 })
+
+app.put('/api/synonym/:text', (req, res) => {
+    const { text } = req.params
+    const synonym = req.body
+    try {
+        readSynonym(text)
+        res.status(200).json(updateSynonym(text, synonym))
+    } catch (error) {
+        res.status(201).json(createSynonym(synonym))
+    }
+})
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
