@@ -1,7 +1,10 @@
 const synonyms = new Map()
 
+synonyms.set('smart', {text: 'smart', synonym: 'brilliant'})
+synonyms.set('stupid', {text: 'stupid', synonym: 'dumb'})
+
 export function readAllSynonyms() {
-    return synonyms.values
+    return Array.from(synonyms.values())
 }
 
 export function readSynonym(text) {
